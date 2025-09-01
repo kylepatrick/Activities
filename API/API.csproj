@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  
+
+  <ItemGroup>
+    <ProjectReference Include="../application/Application.csproj" />
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8" />
+  </ItemGroup>
+
+  <!-- Clean macOS AppleDouble ._* files before compile -->
+  <Target Name="CleanAppleDouble" BeforeTargets="CoreCompile" Condition="$([MSBuild]::IsOsPlatform('OSX'))">
+    <ItemGroup>
+      <AppleDoubleFiles Include="$(MSBuildProjectDirectory)/**/._*" />
+    </ItemGroup>
+
+    <Message Text="Cleaning AppleDouble: @(AppleDoubleFiles)" Importance="Low" />
+    <Delete Files="@(AppleDoubleFiles)" ContinueOnError="true" />
+  </Target>
+
+</Project>

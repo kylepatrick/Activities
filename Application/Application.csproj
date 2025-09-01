@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../domain/Domain.csproj" />
+    <ProjectReference Include="../persistence/Persistence.csproj" />
+  </ItemGroup>
+ <!-- Clean macOS AppleDouble ._* files before compile -->
+  <Target Name="CleanAppleDouble" BeforeTargets="CoreCompile"
+          Condition="$([MSBuild]::IsOsPlatform('OSX'))">
+    <ItemGroup>
+      <AppleDoubleFiles Include="$(MSBuildProjectDirectory)/**/._*" />
+    </ItemGroup>
+
+    <Message Text="Cleaning AppleDouble: @(AppleDoubleFiles)" Importance="Low" />
+    <Delete Files="@(AppleDoubleFiles)" ContinueOnError="true" />
+  </Target>
+</Project>
