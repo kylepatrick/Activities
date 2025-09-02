@@ -10,9 +10,13 @@
     <ProjectReference Include="../domain/Domain.csproj" />
     <ProjectReference Include="../persistence/Persistence.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <PackageReference Include="MediatR" Version="13.0.0" />
+  </ItemGroup>
  <!-- Clean macOS AppleDouble ._* files before compile -->
-  <Target Name="CleanAppleDouble" BeforeTargets="CoreCompile"
-          Condition="$([MSBuild]::IsOsPlatform('OSX'))">
+  <Target Name="CleanAppleDouble" BeforeTargets="CoreCompile" Condition="$([MSBuild]::IsOsPlatform('OSX'))">
     <ItemGroup>
       <AppleDoubleFiles Include="$(MSBuildProjectDirectory)/**/._*" />
     </ItemGroup>

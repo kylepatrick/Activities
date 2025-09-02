@@ -1,4 +1,7 @@
 using System.Net.WebSockets;
+using Application.Activities.Queries;
+using Application.Core;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Persistence;
@@ -11,6 +14,10 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>());
+ 
+  builder.Services.AddAutoMapper(cfg => {}, typeof(MappingProfiles).Assembly); // Scans the assembly where MappingProfile is located
+  
 
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
