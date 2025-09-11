@@ -1,24 +1,26 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './app/layouts/styles.css'
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
- 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { RouterProvider } from 'react-router';
-import { router } from './app/router/routers.tsx';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./app/layouts/styles.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
-const queryClient=new QueryClient();
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { RouterProvider } from "react-router";
+import { router } from "./app/router/routers.tsx";
+import { store, StoreContext } from "./lib/stores/store.ts";
 
-createRoot(document.getElementById('root')!).render(
+const queryClient = new QueryClient();
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools/>
-      <RouterProvider router= {router}/>
-    </QueryClientProvider>
-   
+    <StoreContext.Provider value={store}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </StoreContext.Provider>
   </StrictMode>,
-)
+);
