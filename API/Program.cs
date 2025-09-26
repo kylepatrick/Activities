@@ -1,7 +1,10 @@
 using System.Net.WebSockets;
+using Application.Activites.Commands;
+using Application.Activites.Validators;
 using Application.Activities.Queries;
 using Application.Core;
 using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using Persistence;
@@ -15,7 +18,11 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 builder.Services.AddCors();
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>());
- 
+builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
+
+
+
+
   builder.Services.AddAutoMapper(cfg => {}, typeof(MappingProfiles).Assembly); // Scans the assembly where MappingProfile is located
   
 

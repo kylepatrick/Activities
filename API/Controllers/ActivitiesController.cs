@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using Application.Activites.Commands;
+using Application.Activites.DTOs;
 using Application.Activites.Queries;
 using Application.Activities.Queries;
 using Domain;
@@ -37,9 +38,9 @@ public class ActivitiesController(AppDbContext context) : BaseApiController
 
     }
     [HttpPost]
-    public async Task<ActionResult<string>> CreateActivity(Activity activity)
+    public async Task<ActionResult<string>> CreateActivity(CreateActivityDto activityDto)
     {
-        return await Mediator.Send(new CreateActivity.Command { Activity = activity });
+        return await Mediator.Send(new CreateActivity.Command { ActivityDto = activityDto });
     }
     [HttpPut]
     public async Task<ActionResult> EditActivity(Activity activity)
