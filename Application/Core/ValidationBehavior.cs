@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Core;
 
-
+/* 
 public class ValidationBehavior<Trequest, TResponse>(IValidator<TRequest>? validator = null)
 : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 
@@ -28,5 +28,5 @@ public class ValidationBehavior<Trequest, TResponse>(IValidator<TRequest>? valid
         }
 
      
-
+ */
 
